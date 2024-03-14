@@ -37,7 +37,10 @@ func (t Training) distance() float64 {
 // преодолённая_дистанция_за_тренировку_в_км / время_тренировки_в_часах
 func (t Training) meanSpeed() float64 {
 	// вставьте ваш код ниже
-	return t.distance() / t.Duration.Hours()
+	if t.Duration != 0 {
+		return t.distance() / t.Duration.Hours()
+	}
+	return 0
 }
 
 // Calories возвращает количество потраченных килокалорий на тренировке.
@@ -170,8 +173,11 @@ type Swimming struct {
 // длина_бассейна * количество_пересечений / м_в_км / продолжительность_тренировки
 func (s Swimming) meanSpeed() float64 {
 	// вставьте ваш код ниже
-	result := float64(s.LengthPool*s.CountPool/MInKm) / s.Duration.Hours()
-	return result
+	if s.Duration != 0 {
+		result := float64(s.LengthPool*s.CountPool/MInKm) / s.Duration.Hours()
+		return result
+	}
+	return 0
 }
 
 // Calories возвращает количество калорий, потраченных при плавании.
